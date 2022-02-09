@@ -3,13 +3,13 @@ FROM ros:galactic
 ARG USER_ID
 ARG GROUP_ID
 
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
   ros-galactic-turtle-tf2-py ros-galactic-tf2-tools ros-galactic-tf-transformations \
   libeigen3-dev \
   libpcl-dev \
   ros-galactic-geodesy ros-galactic-pcl-ros ros-galactic-nmea-msgs \
+  ros-galactic-sensor-msgs \
   ros-galactic-rviz2 ros-galactic-libg2o \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
@@ -38,9 +38,13 @@ ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
 
 
+
+
+
 RUN addgroup --gid $GROUP_ID lc
-RUN adduser --gecos '' --uid $USER_ID --gid $GROUP_ID user
+RUN adduser --gecos '' --uid $USER_ID --gid $GROUP_ID lc
 RUN echo "lc:lc" | chpasswd
+RUN usermod -aG sudo lc
 
 USER lc
 
