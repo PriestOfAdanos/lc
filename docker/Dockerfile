@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ros-galactic-geodesy ros-galactic-pcl-ros ros-galactic-nmea-msgs \
   ros-galactic-sensor-msgs \
   ros-galactic-rviz2 ros-galactic-libg2o \
+  ros-galactic-sensor-msgs-py \
+  python3-pip python3-dev python3-setuptools python3-wheel \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -25,6 +27,8 @@ WORKDIR /opt/lc/src
 RUN git clone --recursive https://github.com/rsasaki0109/lidarslam_ros2
 RUN git clone https://github.com/Slamtec/rplidar_ros.git -b ros2 
 RUN git clone https://github.com/ros-perception/laser_geometry.git -b ros2
+
+
 
 COPY . /opt/lc/src/ndt_omp/
 
