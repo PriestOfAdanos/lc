@@ -1,4 +1,4 @@
-FROM ros:galactic
+FROM ros:galactic AS base
 
 ARG USER_ID
 ARG GROUP_ID
@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install RPi.GPIO
 
 RUN mkdir -p /opt/lc/src
 
@@ -24,7 +25,7 @@ WORKDIR /opt/lc/src
 # RUN git clone https://github.com/SMRT-AIST/fast_gicp.git --recursive --depth=1
 # RUN git clone https://github.com/koide3/hdl_graph_slam.git --depth=1
 
-RUN git clone --recursive https://github.com/rsasaki0109/lidarslam_ros2
+RUN git clone https://github.com/PriestOfAdanos/lc_nodes.git -b engine_controller
 RUN git clone https://github.com/Slamtec/rplidar_ros.git -b ros2 
 RUN git clone https://github.com/ros-perception/laser_geometry.git -b ros2
 
