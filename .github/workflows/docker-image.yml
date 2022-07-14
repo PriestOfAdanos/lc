@@ -6,8 +6,7 @@ on:
   pull_request:
     branches: [master, image-push]
   workflow_dispatch:
-    tags:
-      description: "Test scenario tags"
+
 
 jobs:
   build:
