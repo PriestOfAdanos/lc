@@ -15,6 +15,6 @@ jobs:
       - name: Build the Docker images
         run: ./build.sh
       - name: Push the arm image
-        run: push ghcr.io/PriestOfAdanos/lc_arm64:latest
+        run: docker push ghcr.io/PriestOfAdanos/lc_arm64:latest
       - name: Push the amd image
-        run: push ghcr.io/PriestOfAdanos/lc_amd:latest
+        run: docker push ghcr.io/PriestOfAdanos/lc_amd:latest
