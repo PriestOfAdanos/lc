@@ -1,2 +1,5 @@
 ws/**
 *.tar
+log/**
+build/**
+install/**
