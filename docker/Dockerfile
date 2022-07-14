@@ -1,9 +1,5 @@
 FROM amd64/ros:galactic AS base
 
-ARG USERNAME=lc
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
   ros-galactic-turtle-tf2-py ros-galactic-tf2-tools ros-galactic-tf-transformations \
@@ -43,6 +39,10 @@ RUN rm -rf build/ && \
   rm -rf src/
 
 FROM ubuntu:20.04 AS final
+
+ARG USERNAME=lc
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
 COPY --from=base /opt/lc/ /opt/lc/
 COPY --from=base /ros_entrypoint.sh /ros_entrypoint.sh
