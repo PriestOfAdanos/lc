@@ -36,6 +36,8 @@ COPY . /opt/lc/src/ndt_omp/
 
 
 WORKDIR /opt/lc
+RUN /bin/bash -c '. /opt/ros/galactic/setup.bash; colcon build'
+RUN sed -i "6i source \"/opt/lc/install/setup.bash\"" /ros_entrypoint.sh
 RUN rm -rf build/ && \
   rm -rf log/ && \
   rm -rf src/
@@ -43,9 +45,7 @@ RUN rm -rf build/ && \
 FROM amd64/ros:galactic AS final
 
 COPY --from=base /opt/lc/ /opt/lc/
-
-RUN /bin/bash -c '. /opt/ros/galactic/setup.bash; colcon build'
-RUN sed -i "6i source \"/opt/lc/install/setup.bash\"" /ros_entrypoint.sh
+COPY --from=base /ros_entrypoint.sh /ros_entrypoint.sh
 
 WORKDIR /
 
