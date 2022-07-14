@@ -1,10 +1,4 @@
-FROM ros:galactic AS base
-
-ARG USERNAME=lc
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
-USER root
+FROM ubuntu:20.04
 RUN apt clean
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
@@ -22,6 +16,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pip python3-dev python3-setuptools python3-wheel \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+
+FROM ros:galactic AS base
+
+ARG USERNAME=lc
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+USER root
 
 RUN pip3 install RPi.GPIO
 
