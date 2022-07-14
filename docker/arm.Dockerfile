@@ -1,17 +1,8 @@
-FROM ubuntu:20.04
-
-RUN apt update
-
-
-
-
-FROM ros:galactic
+FROM arm64v8/ros:galactic
 
 ARG USERNAME=lc
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
