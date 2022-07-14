@@ -5,7 +5,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 
-RUN apt install -y apt-transport-https
+RUN apt clean
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
   ros-galactic-turtle-tf2-py ros-galactic-tf2-tools ros-galactic-tf-transformations
