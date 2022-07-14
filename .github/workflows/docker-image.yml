@@ -2,17 +2,19 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master, image-push]
   pull_request:
-    branches: [ master ]
+    branches: [master, image-push]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file docker/Dockerfile --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g)  --tag lc:$(date +%s) 
+      - uses: actions/checkout@v2
+      - name: Build the Docker images
+        run: ./build.sh
+      - name: Push the arm image
+        run: push ghcr.io/PriestOfAdanos/lc_arm64:latest
+      - name: Push the amd image
+        run: push ghcr.io/PriestOfAdanos/lc_amd:latest
