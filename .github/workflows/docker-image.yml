@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker images
-        run: ./buidls.sh
+        run: ./build.sh
       - name: Push the arm image
         run: push ghcr.io/PriestOfAdanos/lc_arm64:latest
       - name: Push the amd image
