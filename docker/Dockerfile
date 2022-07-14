@@ -42,7 +42,7 @@ RUN rm -rf build/ && \
   rm -rf log/ && \
   rm -rf src/
 
-FROM amd64/ros:galactic AS final
+FROM ubuntu:20.04 AS final
 
 COPY --from=base /opt/lc/ /opt/lc/
 COPY --from=base /ros_entrypoint.sh /ros_entrypoint.sh
