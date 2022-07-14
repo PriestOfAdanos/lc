@@ -1,7 +1,10 @@
 FROM ros:galactic AS base
 
-ARG USER_ID
-ARG GROUP_ID
+ARG USERNAME=lc
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
@@ -47,9 +50,9 @@ CMD ["bash"]
 
 
 
-RUN addgroup --gid $GROUP_ID lc
-RUN adduser --gecos '' --uid $USER_ID --gid $GROUP_ID lc
-RUN echo "lc:lc" | chpasswd
+# Create the user
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN usermod -aG sudo lc
 
 USER lc
