@@ -43,7 +43,7 @@ FROM ubuntu:20.04 AS final
 ARG USERNAME=lc
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
+COPY --from=base /opt/ros/galactic /opt/ros/galactic
 COPY --from=base /opt/lc/ /opt/lc/
 COPY --from=base /ros_entrypoint.sh /ros_entrypoint.sh
 
