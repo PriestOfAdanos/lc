@@ -3,9 +3,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 
-
-
-FROM ros-full AS dep-install
+FROM ghcr.io/priestofadanos/ros:galactic AS dep-install
 ARG USERNAME
 ARG USER_UID
 ARG USER_GID
@@ -24,7 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install RPi.GPIO transforms3d
-
+RUN apt-get install bluetooth libbluetooth-dev
+RUN python3 -m pip install pybluez
 RUN mkdir -p /opt/$USERNAME/src
 
 FROM dep-install as dep-compile
