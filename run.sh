@@ -1,3 +1,3 @@
 #! /bin/sh
-docker run -it  --privileged  -v /home/phabrzyk/lc/ws:/home/lc/ws -v /home/phabrzyk/.ssh:/home/lc/.ssh ghcr.io/priestofadanos/lc:image-push bash
+docker run -it  --privileged --user=root --mount type=bind,source="$(pwd)"/bags,target=/bags  ghcr.io/priestofadanos/lc:image-push
 # --device=/dev/ttyUSB0
