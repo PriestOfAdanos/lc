@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ros-galactic-tf2-tools ros-galactic-tf-transformations \
   libeigen3-dev \
   libpcl-dev \
+  bluetooth libbluetooth-dev \
   ros-galactic-geodesy ros-galactic-pcl-ros ros-galactic-nmea-msgs \
   ros-galactic-sensor-msgs \
   ros-galactic-sensor-msgs-py \
@@ -21,9 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install RPi.GPIO transforms3d
-RUN apt-get install bluetooth libbluetooth-dev
-RUN python3 -m pip install pybluez
+RUN pip3 install RPi.GPIO transforms3d pybluez
 RUN mkdir -p /opt/$USERNAME/src
 
 FROM dep-install as dep-compile
