@@ -39,14 +39,13 @@ def generate_launch_description():
             output='both',
             respawn=False
         ),
-        # Node(
-        #     package='octomap_server',
-        #     executable='octomap_server_node',
-        #     name='octomap_server_node',
-        #     output='both',
-        #     respawn=False,
-        #     parameters=[{'frame_id': "base_link", "latch": False}]
-        # ),
+        Node(
+            package='bluetooth_scanner',
+            executable='bluetooth_scanner_node',
+            name='bluetooth_scanner_node',
+            output='both',
+            respawn=False,
+        ),
         Node(
             package='scan_assembler',
             executable='scan_assembler_node',
