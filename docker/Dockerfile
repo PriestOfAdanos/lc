@@ -58,3 +58,5 @@ WORKDIR /
 USER $USERNAME
 
 WORKDIR /home/$USERNAME/ws
+
+ENTRYPOINT . /opt/$USERNAME/install/setup.bash && ros2  launch /opt/$USERNAME/launch_files/scanner_launch.py
