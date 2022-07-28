@@ -40,9 +40,9 @@ def generate_launch_description():
             respawn=False
         ),
         Node(
-            package='bluetooth_scanner',
-            executable='bluetooth_scanner_node',
-            name='bluetooth_scanner_node',
+            package='bluetooth_talker',
+            executable='bluetooth_talker_node',
+            name='bluetooth_talker_node',
             output='both',
             respawn=False,
         ),

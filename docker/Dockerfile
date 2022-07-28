@@ -50,13 +50,10 @@ ARG USER_UID
 ARG USER_GID
 
 COPY --from=dep-compile /opt/$USERNAME/install /opt/$USERNAME/install
+COPY launch/ /opt/lc/launch_files/
 
 WORKDIR /
 
-# Create the user
-
-# ENTRYPOINT ["/ros_entrypoint.sh"]
-# CMD ["bash"]
 
 USER $USERNAME
 
