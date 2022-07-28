@@ -53,5 +53,8 @@ def generate_launch_description():
             output='both',
             respawn=False
         ),
-
+        launch.actions.ExecuteProcess(
+            cmd=['ros2', 'bag', 'record', '-a', '-o', '/bags/scan_assembler_node.bag'],
+            output='screen'
+        ),
     ])
