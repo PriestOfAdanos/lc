@@ -1,4 +1,4 @@
-from launch import LaunchDescription
+from launch import LaunchDescription, actions
 from launch_ros.actions import Node
 
 
@@ -53,7 +53,7 @@ def generate_launch_description():
             output='both',
             respawn=False
         ),
-        launch.actions.ExecuteProcess(
+        actions.ExecuteProcess(
             cmd=['ros2', 'bag', 'record', '-a', '-o', '/bags/scan_assembler_node.bag'],
             output='screen'
         ),
