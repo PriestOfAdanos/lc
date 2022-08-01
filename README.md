@@ -1,5 +1,6 @@
-# Main repo of LaserCube (lc), a device to measure interiors of rooms meant for custom furniture measurement
-## it uses octotrees to build pointclouds from bags recorded by the device
+# Main repo of LaserCube (lc).
+LaserCube is a device to measure interiors of rooms meant for custom furniture measurement
+it uses octotrees to build pointclouds from bags recorded by the device
 
 Here You can find Dockerfiles that build to amd (intel) and arm (raspbery pi). Nodes can be found in lc_nodes project, they include:
   - bluetooth server: handles communication between mobile app and ros2
