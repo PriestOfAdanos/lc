@@ -1,57 +1,62 @@
-FROM ros:galactic AS base
+ARG USERNAME=lc
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
-ARG USER_ID
-ARG GROUP_ID
+
+FROM ghcr.io/priestofadanos/ros:galactic AS dep-install
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget nano build-essential libomp-dev clang lld git\
-  ros-galactic-turtle-tf2-py ros-galactic-tf2-tools ros-galactic-tf-transformations \
+  ros-galactic-tf2-tools ros-galactic-tf-transformations \
   libeigen3-dev \
   libpcl-dev \
+  libbluetooth-dev \
   ros-galactic-geodesy ros-galactic-pcl-ros ros-galactic-nmea-msgs \
   ros-galactic-sensor-msgs \
-  ros-galactic-rviz2 ros-galactic-libg2o \
   ros-galactic-sensor-msgs-py \
   ros-galactic-octomap-mapping \
-  python3-pip python3-dev python3-setuptools python3-wheel \
-  && apt-get clean \
+  python3-pip python3-dev python3-setuptools python3-wheel
+
+RUN pip3 install RPi.GPIO transforms3d bluedot
+RUN mkdir -p /opt/$USERNAME/src
+
+RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install RPi.GPIO
+FROM dep-install as dep-compile
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
 
-RUN mkdir -p /opt/lc/src
+WORKDIR /opt/$USERNAME/src
 
-WORKDIR /opt/lc/src
-# Comment it out until the repository supports ROS2 builds.
-# RUN git clone https://github.com/SMRT-AIST/fast_gicp.git --recursive --depth=1
-# RUN git clone https://github.com/koide3/hdl_graph_slam.git --depth=1
-
-RUN git clone https://github.com/PriestOfAdanos/lc_nodes.git
+RUN git clone https://github.com/PriestOfAdanos/lc_nodes.git -b bluetooth_talker
 RUN git clone https://github.com/Slamtec/rplidar_ros.git -b ros2 
 RUN git clone https://github.com/ros-perception/laser_geometry.git -b ros2
 RUN git clone https://github.com/OctoMap/octomap_mapping.git -b ros2
 
+COPY . /opt/$USERNAME/src/ndt_omp/
 
-COPY . /opt/lc/src/ndt_omp/
-
-WORKDIR /opt/lc
+WORKDIR /opt/$USERNAME
 RUN /bin/bash -c '. /opt/ros/galactic/setup.bash; colcon build'
-RUN sed -i "6i source \"/opt/lc/install/setup.bash\"" /ros_entrypoint.sh
+
+
+FROM  dep-install AS final
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
+
+COPY --from=dep-compile /opt/$USERNAME/install /opt/$USERNAME/install
+COPY launch/ /opt/lc/launch_files/
 
 WORKDIR /
 
-ENTRYPOINT ["/ros_entrypoint.sh"]
-CMD ["bash"]
 
+USER $USERNAME
 
+WORKDIR /home/$USERNAME/ws
 
-
-
-RUN addgroup --gid $GROUP_ID lc
-RUN adduser --gecos '' --uid $USER_ID --gid $GROUP_ID lc
-RUN echo "lc:lc" | chpasswd
-RUN usermod -aG sudo lc
-
-USER lc
-
-WORKDIR /home/lc/ws
+# ENTRYPOINT . /opt/lc/install/setup.bash && ros2  launch /opt/lc/launch_files/scanner_launch.py
