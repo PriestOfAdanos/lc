@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [master, image-push]
+    branches: [master, experimental, image-push, launch_files]
   pull_request:
-    branches: [master, image-push]
+    branches: [master, experimental, image-push, launch_files]
   workflow_dispatch:
 
 jobs:
