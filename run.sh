@@ -5,8 +5,9 @@ trailing_parameters=''
 
 print_usage() {
   printf "Usage: 
-  production_mode: ./run.sh -p
-  development_mode: ./run.sh -d
+  production mode: -p
+  development mode: -d
+  
   "
 }
 run_docker() {
