@@ -33,6 +33,7 @@ ARG USER_GID
 
 WORKDIR /opt/$USERNAME/src
 
+
 RUN git clone https://github.com/PriestOfAdanos/lc_nodes.git
 RUN git clone https://github.com/Slamtec/rplidar_ros.git -b ros2 
 RUN git clone https://github.com/ros-perception/laser_geometry.git -b ros2
@@ -50,7 +51,6 @@ ARG USER_UID
 ARG USER_GID
 
 COPY --from=dep-compile /opt/$USERNAME/install /opt/$USERNAME/install
-COPY launch/ /opt/lc/launch_files/
 
 WORKDIR /
 
