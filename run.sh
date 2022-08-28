@@ -12,7 +12,7 @@ print_usage() {
   "
 }
 run_docker() {
-  printf "running docker ..."
+  printf "running ghcr.io/priestofadanos/lc:$tag... \n"
   docker run -it --net=host --privileged --user=root  $forward_parameters \
     --mount type=bind,source="$(pwd)"/bags,target=/bags  \
     --mount type=bind,source=/var/run/dbus/system_bus_socket,target=/var/run/dbus/system_bus_socket \
