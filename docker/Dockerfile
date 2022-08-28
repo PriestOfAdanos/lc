@@ -54,9 +54,9 @@ COPY --from=dep-compile /opt/$USERNAME/install /opt/$USERNAME/install
 
 WORKDIR /
 
+COPY lc_entrypoint_scripts/* /opt/$USERNAME/scripts/
 
 USER $USERNAME
 
-WORKDIR /home/$USERNAME/ws
 
 # ENTRYPOINT . /opt/lc/install/setup.bash && ros2  launch /opt/lc/launch_files/scanner_launch.py
