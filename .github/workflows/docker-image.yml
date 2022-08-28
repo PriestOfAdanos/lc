@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [master, experimental, image-push, launch_files]
+    branches: [master, bluetooth_fix]
   pull_request:
-    branches: [master, experimental, image-push, launch_files]
+    branches: [master, bluetooth_fix]
   workflow_dispatch:
 
 jobs:
