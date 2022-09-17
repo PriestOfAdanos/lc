@@ -2,3 +2,8 @@
 	path = lc_nodes
 	url = git@github.com:PriestOfAdanos/lc_nodes.git
 	branch = master
+[submodule "lc_scan_assembler"]
+	path = lc_scan_assembler
+	url = git@github.com:PriestOfAdanos/lc_scan_assembler.git
+	branch = main
+    
