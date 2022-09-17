@@ -1,9 +1,6 @@
-[submodule "lc_sensor_grabber"]
-	path = lc_sensor_grabber
-	url = git@github.com:PriestOfAdanos/lc_sensor_grabber.git
-	branch = master
 [submodule "lc_scan_assembler"]
 	path = lc_scan_assembler
 	url = git@github.com:PriestOfAdanos/lc_scan_assembler.git
-	branch = main
-    
+[submodule "lc_sensor_grabber"]
+	path = lc_sensor_grabber
+	url = git@github.com:PriestOfAdanos/lc_sensor_grabber.git
