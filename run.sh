@@ -37,8 +37,8 @@ while getopts "pdt:" flag; do
        print_help=false
        ;;
     *) print_usage
-       exit 1
        print_help=false 
+       exit 1
        ;;
   esac
 done
