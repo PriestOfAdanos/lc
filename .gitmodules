@@ -1,0 +1,4 @@
+[submodule "ws"]
+	path = ws
+	url = git@github.com:PriestOfAdanos/lc_nodes.git
+	branch = master
