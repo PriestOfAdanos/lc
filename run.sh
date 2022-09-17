@@ -10,7 +10,7 @@ print_usage() {
   production mode: -p
   development mode: -d
   docker tag: -t [tag]
-  "
+"
 }
 run_docker() {
   printf "running ghcr.io/priestofadanos/lc:$tag... \n"
