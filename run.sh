@@ -18,7 +18,7 @@ run_docker() {
     --mount type=bind,source="$(pwd)"/bags,target=/bags  \
     --mount type=bind,source=/var/run/dbus/system_bus_socket,target=/var/run/dbus/system_bus_socket \
     --device=/dev/ttyUSB0 \
-    ghcr.io/priestofadanos/lc:$tag bash \
+    ghcr.io/priestofadanos/lc_sensor_grabber:$tag bash \
     $trailing_parameters
 }
 
@@ -29,7 +29,7 @@ while getopts "pdt:" flag; do
        print_help=false
     ;;
     d) trailing_parameters=""
-       forward_parameters="--mount type=bind,source="$(pwd)"/ws,target=/home/lc/ws"
+       forward_parameters="--mount type=bind,source="$(pwd)"/lc_sensor_grabber,target=/home/lc/lc_sensor_grabber"
        print_help=false
 
     ;;
